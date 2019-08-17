@@ -53,11 +53,11 @@ public class UserServiceTest {
 		final String accessToken = "EAAj259ZBvk6wBABiGRWYOvAGk7gMGwZDZD";
 		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUser.json"), User.class);
 		final FacebookUser facebookUser = mapper.readValue(Util.readJsonFile("sampleFacebookUserData.json"), FacebookUser.class);
-		given(graphApi.load(accessToken)).willReturn(facebookUser);
+		given(graphApi.load(new String[] {"gender", "picture", "name"}, accessToken)).willReturn(facebookUser);
 		
 		final User user = service.create(accessToken);
 		
-		verify(graphApi).load(accessToken);
+		verify(graphApi).load(new String[] {"gender", "picture", "name"}, accessToken);
 		assertThat(user).isEqualTo(expectedUser);
 	}
 

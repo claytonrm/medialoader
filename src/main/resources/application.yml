@@ -5,4 +5,4 @@ services:
    api:
       facebook:
          graph:
-            url: graph.facebook.com
+            url: https://graph.facebook.com/v4.0

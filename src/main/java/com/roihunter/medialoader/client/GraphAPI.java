@@ -9,11 +9,12 @@ import com.roihunter.medialoader.domain.facebook.FacebookUser;
 
 import feign.Headers;
 
-@FeignClient(value = "graph-api", url = "https://graph.facebook.com")
+@FeignClient(value = "graph-api", url = "${services.api.facebook.graph.url}")
 @Headers({"Content-type", "application/json"})
 public interface GraphAPI {
 	
 	@GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
-	FacebookUser load(@RequestParam final String accessToken);
+	FacebookUser load(@RequestParam(name = "fields") final String[] fields, 
+			@RequestParam(name = "access_token") final String accessToken);
 
 }

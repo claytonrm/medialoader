@@ -5,4 +5,4 @@ services:
    api:
       facebook:
          graph:
-            url: anyway.facebook.com
+            url: https://anyway.facebook.com/v4.0
