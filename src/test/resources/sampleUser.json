@@ -9,15 +9,15 @@
 		"reactions": [
 			{
 				"type": "LIKE",
-				"value": 4
+				"value": 66
 			},
 			{
 				"type": "LOVE",
-				"value": 10
+				"value": 3
 			},
 			{
 				"type": "WOW",
-				"value": 15
+				"value": 1
 			},
 			{
 				"type": "HAHA",
