@@ -1,12 +1,13 @@
 {
   "gender": "male",
+  "name": "Clayton R. Mendonca",
   "picture": {
     "data": {
       "height": 50,
       "is_silhouette": false,
-      "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2425138454230590&height=50&width=50&ext=1568601335&hash=AeRzoQmph_0CCWoq",
+      "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=anyway",
       "width": 50
     }
   },
-  "id": "2425138454230590"
+  "id": "1234567890"
 }

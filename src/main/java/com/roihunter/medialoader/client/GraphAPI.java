@@ -1,8 +1,7 @@
 package com.roihunter.medialoader.client;
 
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -12,7 +11,6 @@ import feign.Headers;
 
 @FeignClient(value = "graph-api", url = "https://graph.facebook.com")
 @Headers({"Content-type", "application/json"})
-@Service
 public interface GraphAPI {
 	
 	@GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)

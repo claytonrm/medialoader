@@ -6,12 +6,15 @@ import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -27,9 +30,10 @@ import com.roihunter.medialoader.util.Util;
 public class UserServiceTest {
 	
 	@Autowired
+	@InjectMocks
 	private UserService service;
 	
-	@MockBean
+	@Mock
 	private GraphAPI graphApi;
 	
 	private static ObjectMapper mapper;
@@ -37,6 +41,11 @@ public class UserServiceTest {
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		mapper = new ObjectMapper();
+	}
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 	}
 	
 	@Test
