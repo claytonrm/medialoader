@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.roihunter.medialoader.domain.facebook.FacebookData;
 import com.roihunter.medialoader.domain.facebook.FacebookUser;
 
 import feign.Headers;
@@ -14,7 +15,11 @@ import feign.Headers;
 public interface GraphAPI {
 	
 	@GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
-	FacebookUser load(@RequestParam(name = "fields") final String[] fields, 
+	FacebookUser getProfileInfo(@RequestParam(name = "fields") final String[] fields, 
+			@RequestParam(name = "access_token") final String accessToken);
+
+	@GetMapping(value = "/me/photos", produces = MediaType.APPLICATION_JSON_VALUE)
+	FacebookData getUserPhotos(@RequestParam(name = "fields") final String[] fields, 
 			@RequestParam(name = "access_token") final String accessToken);
 
 }

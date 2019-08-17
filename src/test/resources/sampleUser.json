@@ -2,5 +2,35 @@
 	"id": "1234567890",
 	"name": "Clayton R. Mendonca",
 	"gender": "male",
-	"profilePictureUrl": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=anyway"
+	"photos": [{
+		"facebookUrl": "https://www.facebook.com/SomeGroup/photos/a.23423/4343/?type=3",
+		"sourceUrl": "https://scontent.xx.fbcdn.net/v/t31.0-8/65655_o.jpg?_nc_cat=107",
+		"id": "2345654323456543",
+		"reactions": [
+			{
+				"type": "LIKE",
+				"value": 4
+			},
+			{
+				"type": "LOVE",
+				"value": 10
+			},
+			{
+				"type": "WOW",
+				"value": 15
+			},
+			{
+				"type": "HAHA",
+				"value": 5
+			},
+			{
+				"type": "SAD",
+				"value": 2
+			},
+			{
+				"type": "ANGRY",
+				"value": 0
+			}
+		]
+	}]
 }

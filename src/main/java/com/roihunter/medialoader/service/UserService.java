@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.roihunter.medialoader.client.GraphAPI;
 import com.roihunter.medialoader.domain.User;
 import com.roihunter.medialoader.domain.facebook.FacebookUser;
-import com.roihunter.medialoader.domain.facebook.ProfilePicture;
 
 @Service
 public class UserService {
@@ -16,16 +15,20 @@ public class UserService {
 	
 	public User create(final String token) {
 		
-		final String[] fields = new String[] {"gender", "picture", "name"};
-		final FacebookUser facebookUser = graphApi.load(fields, token);
-		final ProfilePicture profilePicture = facebookUser.getPicture();
+		//fields=id, link, album, images, from
+		//{photo-id}/reactions?summary=total_count
 		
-		final User user = new User(facebookUser.getId(), 
+		final String[] fields = new String[] {"gender", "picture", "name"};
+		final FacebookUser facebookUser = graphApi.getProfileInfo(fields, token);
+		
+		final User user = new User(
+				facebookUser.getId(), 
 				facebookUser.getName(), 
-				facebookUser.getGender(), 
-				profilePicture != null ? profilePicture.getData().getUrl() : null
+				facebookUser.getGender(),
+				null
 			);
 		
+
 		return user;
 	}
 

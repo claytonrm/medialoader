@@ -1,11 +1,11 @@
 package com.roihunter.medialoader.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,17 +21,18 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.roihunter.medialoader.client.GraphAPI;
+import com.roihunter.medialoader.domain.Photo;
 import com.roihunter.medialoader.domain.User;
-import com.roihunter.medialoader.domain.facebook.FacebookUser;
+import com.roihunter.medialoader.domain.facebook.FacebookData;
 import com.roihunter.medialoader.util.Util;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class PhotoServiceTest {
 	
 	@Autowired
 	@InjectMocks
-	private UserService service;
+	private PhotoService service;
 	
 	@Mock
 	private GraphAPI graphApi;
@@ -49,18 +50,17 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void create_shouldCallFacebookClientServiceToGetUserInfo() throws JsonParseException, JsonMappingException, IOException {
+	public void getUserPhotos_shouldReturnAListOfUserPhotos() throws JsonParseException, JsonMappingException, IOException {
 		final String accessToken = "EAAj259ZBvk6wBABiGRWYOvAGk7gMGwZDZD";
-		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUser.json"), User.class);
-		final FacebookUser facebookUser = mapper.readValue(Util.readJsonFile("sampleFacebookUserData.json"), FacebookUser.class);
-		given(graphApi.getProfileInfo(new String[] {"gender", "picture", "name"}, accessToken)).willReturn(facebookUser);
+		final FacebookData expectedData = mapper.readValue(Util.readJsonFile("sampleFacebookUserPhotos.json"), FacebookData.class);
+		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);
+		given(graphApi.getUserPhotos(new String[] {"id, link, album, images, from"}, accessToken)).willReturn(expectedData);
 		
-		final User user = service.create(accessToken);
+		final List<Photo> userPhotos = service.getUserPhotos(accessToken);
 		
-		verify(graphApi).getProfileInfo(new String[] {"gender", "picture", "name"}, accessToken);
-		assertThat(user.getId()).isEqualTo(expectedUser.getId());
-		assertThat(user.getName()).isEqualTo(expectedUser.getName());
-		assertThat(user.getGender()).isEqualTo(expectedUser.getGender());
+		Assertions.assertThat(userPhotos).isEqualTo(expectedUser.getPhotos());
 	}
+	
+	
 
 }
