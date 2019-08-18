@@ -22,9 +22,6 @@ public class UserService {
 	
 	public User create(final String token) {
 
-		// {photo-id}/reactions?summary=total_count
-		//fields=reactions.type(LIKE).limit(0).summary(total_count)
-
 		final String[] fields = new String[] { "gender", "picture", "name" };
 		final FacebookUser facebookUser = graphApi.getProfileInfo(fields, token);
 		final List<Photo> userPhotos = photoService.getUserPhotos(token);

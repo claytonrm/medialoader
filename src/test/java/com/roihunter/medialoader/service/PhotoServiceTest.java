@@ -57,6 +57,11 @@ public class PhotoServiceTest {
 		final FacebookData expectedData = mapper.readValue(Util.readJsonFile("sampleFacebookUserPhotos.json"), FacebookData.class);
 		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);
 		given(graphApi.getUserPhotos(new String[] {"id, link, album, images, from"}, accessToken)).willReturn(expectedData);
+		final String[] fields = new String[ReactionType.values().length];
+		for (int i = 0; i < ReactionType.values().length; i++) {
+			fields[i] = ReactionType.values()[i].getQuery();
+		}
+		given(graphApi.getReactions(fields, accessToken)).willReturn(null);
 		
 		final List<Photo> userPhotos = service.getUserPhotos(accessToken);
 		
@@ -72,7 +77,7 @@ public class PhotoServiceTest {
 		
 		final ReactionsSummary reactionsSummary = mapper.readValue(Util.readJsonFile("sampleFacebookReactions.json"), ReactionsSummary.class);
 		
-		final String[] fields = new String[] {};
+		final String[] fields = new String[ReactionType.values().length];
 		for (int i = 0; i < ReactionType.values().length; i++) {
 			fields[i] = ReactionType.values()[i].getQuery();
 		}
