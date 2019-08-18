@@ -61,7 +61,7 @@ public class PhotoServiceTest {
 		for (int i = 0; i < ReactionType.values().length; i++) {
 			fields[i] = ReactionType.values()[i].getQuery();
 		}
-		given(graphApi.getReactions(fields, accessToken)).willReturn(null);
+		given(graphApi.getReactions("2345654323456543", fields, accessToken)).willReturn(null);
 		
 		final List<Photo> userPhotos = service.getUserPhotos(accessToken);
 		
@@ -82,7 +82,7 @@ public class PhotoServiceTest {
 			fields[i] = ReactionType.values()[i].getQuery();
 		}
 		
-		given(graphApi.getReactions(fields, accessToken)).willReturn(reactionsSummary);
+		given(graphApi.getReactions("2345654323456543", fields, accessToken)).willReturn(reactionsSummary);
 		
 		final List<Photo> userPhotos = service.getUserPhotos(accessToken);
 		

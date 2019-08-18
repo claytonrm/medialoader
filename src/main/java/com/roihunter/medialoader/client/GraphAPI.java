@@ -3,6 +3,7 @@ package com.roihunter.medialoader.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.roihunter.medialoader.domain.facebook.FacebookData;
@@ -23,8 +24,8 @@ public interface GraphAPI {
 	FacebookData getUserPhotos(@RequestParam(name = "fields") final String[] fields, 
 			@RequestParam(name = "access_token") final String accessToken);
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	ReactionsSummary getReactions(@RequestParam(name = "fields") final String[] fields, 
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	ReactionsSummary getReactions(@PathVariable("id") final String postId, @RequestParam(name = "fields") final String[] fields, 
 			@RequestParam(name = "access_token") final String accessToken);
 
 }

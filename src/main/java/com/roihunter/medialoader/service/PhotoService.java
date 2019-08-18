@@ -40,19 +40,19 @@ public class PhotoService {
 			newPhoto.setId(photo.getId());
 			newPhoto.setFacebookUrl(photo.getLink());
 			newPhoto.setSourceUrl(photo.getImages().stream().findFirst().get().getSource());
-			newPhoto.setReactions(getReactions(accessToken));
+			newPhoto.setReactions(getReactions(photo.getId(), accessToken));
 			userPhotos.add(newPhoto);
 		});
 		return userPhotos;
 	}
 	
-	private List<Reaction> getReactions(final String accessToken) {
+	private List<Reaction> getReactions(final String photoId, final String accessToken) {
 		final String[] fields = new String[ReactionType.values().length];
 		for (int i = 0; i < ReactionType.values().length; i++) {
 			fields[i] = ReactionType.values()[i].getQuery();
 		}
 		
-		final ReactionsSummary summary = graphApi.getReactions(fields, accessToken);
+		final ReactionsSummary summary = graphApi.getReactions(photoId, fields, accessToken);
 		
 		if (summary == null) {
 			return Collections.emptyList();
