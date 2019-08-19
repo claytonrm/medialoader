@@ -11,7 +11,7 @@ import com.roihunter.medialoader.domain.User;
 import com.roihunter.medialoader.domain.facebook.FacebookUser;
 
 @Service
-public class UserService implements MediaLoaderService<User> {
+public class UserService implements IService<User> {
 	
 	@Autowired
 	private GraphAPI graphApi;

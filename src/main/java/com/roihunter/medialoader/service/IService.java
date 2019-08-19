@@ -1,6 +1,6 @@
 package com.roihunter.medialoader.service;
 
-public interface MediaLoaderService<T> {
+public interface IService<T> {
 	
 	T create(final String accessToken);
 	
