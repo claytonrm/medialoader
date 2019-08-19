@@ -17,6 +17,7 @@ public class User {
 	private String id;
 	private String name;
 	private Gender gender;
+	private String profilePicture;
 	private List<Photo> photos;
 	
 }

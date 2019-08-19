@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.roihunter.medialoader.client.GraphAPI;
 import com.roihunter.medialoader.domain.Photo;
@@ -15,7 +15,7 @@ import com.roihunter.medialoader.domain.ReactionType;
 import com.roihunter.medialoader.domain.facebook.FacebookData;
 import com.roihunter.medialoader.domain.facebook.ReactionsSummary;
 
-@Service
+@Component
 public class PhotoService {
 	
 	@Autowired

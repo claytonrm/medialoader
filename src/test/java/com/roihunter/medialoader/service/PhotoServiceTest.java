@@ -87,9 +87,6 @@ public class PhotoServiceTest {
 		final List<Photo> userPhotos = service.getUserPhotos(accessToken);
 		
 		assertThat(userPhotos.stream().findFirst().get().getReactions()).isEqualTo(expectedUser.getPhotos().stream().findFirst().get().getReactions());
-		
 	}
-	
-	
 
 }
