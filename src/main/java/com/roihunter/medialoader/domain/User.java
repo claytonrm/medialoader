@@ -20,4 +20,9 @@ public class User {
 	private String profilePicture;
 	private List<Photo> photos;
 	
+	public User(final String id, final String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 }

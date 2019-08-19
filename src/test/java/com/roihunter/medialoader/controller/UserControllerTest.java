@@ -62,6 +62,9 @@ public class UserControllerTest {
 	
 	@Test
 	public void create_shouldCallServiceWithTokenToLoadData() throws Exception {
+		final User userInfoExpected = mapper.readValue(Util.readJsonFile("sampleUserInfo.json"), User.class);
+		given(userService.create(accessToken)).willReturn(userInfoExpected);
+		
 		final ArgumentCaptor<String> accessTokenCature = ArgumentCaptor.forClass(String.class);
 		
 		mockMvc.perform(post("/v1/users").contentType(MediaType.APPLICATION_JSON).headers(headers))
