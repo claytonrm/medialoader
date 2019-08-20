@@ -57,6 +57,10 @@ public class User implements Serializable {
 		this.name = name;
 	}
 	
+	public User(final List<Photo> photos) {
+		this.photos = photos;
+	}
+	
 	public User(final String facebookId, final String name, final Gender gender, final String profilePicture, final List<Photo> photos) {
 		this.facebookId = facebookId;
 		this.name = name;
