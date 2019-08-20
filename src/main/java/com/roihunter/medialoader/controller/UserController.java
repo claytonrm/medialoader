@@ -30,8 +30,8 @@ public class UserController {
 			final UriComponentsBuilder uriBuilder) {
 		
 		final User user = userService.create(accessToken);
-	    final URI uri = uriBuilder.path("/v1/users/{id}").buildAndExpand(user.getId()).toUri();
-		return ResponseEntity.created(uri).body(new User(user.getId(), user.getName()));
+	    final URI uri = uriBuilder.path("/v1/users/{id}").buildAndExpand(user.getFacebookId()).toUri();
+		return ResponseEntity.created(uri).body(new User(user.getFacebookId(), user.getName()));
 	}
 
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

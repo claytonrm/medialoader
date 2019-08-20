@@ -37,7 +37,7 @@ public class PhotoService {
 		
 		data.getData().stream().forEach(photo -> {
 			final Photo newPhoto = new Photo(); 
-			newPhoto.setId(photo.getId());
+			newPhoto.setFacebookId(photo.getId());
 			newPhoto.setFacebookUrl(photo.getLink());
 			newPhoto.setSourceUrl(photo.getImages().stream().findFirst().get().getSource());
 			newPhoto.setReactions(getReactions(photo.getId(), accessToken));

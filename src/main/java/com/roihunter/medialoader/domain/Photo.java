@@ -2,14 +2,52 @@ package com.roihunter.medialoader.domain;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 
 @Data
+@Entity
+@Table(name = "photos")
 public class Photo {
 
-	private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("photoId")
+	private Long id;
+	
+	@JsonProperty("id")
+	@Column(name = "facebook_id")
+	private String facebookId;
+	
+	@Column(name = "facebook_url")
 	private String facebookUrl;
+	
+	@Column(name = "source_url")
 	private String sourceUrl;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
+	
+	@OneToMany
 	private List<Reaction> reactions;	
 	
 }

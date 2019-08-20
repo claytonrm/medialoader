@@ -61,7 +61,7 @@ public class UserServiceTest {
 		final User user = service.create(accessToken);
 		
 		verify(graphApi).getProfileInfo(new String[] {"gender", "picture", "name"}, accessToken);
-		assertThat(user.getId()).isEqualTo(expectedUser.getId());
+		assertThat(user.getFacebookId()).isEqualTo(expectedUser.getFacebookId());
 		assertThat(user.getName()).isEqualTo(expectedUser.getName());
 		assertThat(user.getGender()).isEqualTo(expectedUser.getGender());
 	}
