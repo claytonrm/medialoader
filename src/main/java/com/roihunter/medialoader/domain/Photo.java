@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
@@ -39,12 +40,13 @@ public class Photo {
 	@Column(name = "source_url")
 	private String sourceUrl;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
+    @EqualsAndHashCode.Exclude
     private User user;
 	
-	@OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Reaction> reactions;	
-	
+	@OneToMany(mappedBy = "photo", cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<Reaction> reactions;
+
 }

@@ -50,7 +50,7 @@ public class User implements Serializable {
 	@Column(name = "profile_picture")
 	private String profilePicture;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Photo> photos;
 	
 	public User(final String facebookId, final String name) {

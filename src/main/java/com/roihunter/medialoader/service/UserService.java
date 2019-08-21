@@ -39,11 +39,13 @@ public class UserService implements IService<User> {
 			final FacebookUser facebookUser = graphApi.getProfileInfo(fields, token);
 			final List<Photo> userPhotos = photoService.getUserPhotos(token);
 			final String profilePicureUrl = facebookUser.getPicture() != null ? facebookUser.getPicture().getData().getUrl() : null;
-			final User user = new User(facebookUser.getId(), facebookUser.getName(), facebookUser.getGender(),  profilePicureUrl, userPhotos);
+			final User user = new User(facebookUser.getId(), facebookUser.getName(), facebookUser.getGender(), profilePicureUrl, userPhotos);
+			userPhotos.stream().forEach(u -> u.setUser(user));
 			
 			delete(facebookUser.getId());
+			
 			return repository.save(user);
-
+			
 		} catch (FeignException e) {
 			throw new AuthenticationException("Problem connecting on Graph API. Please check your token expiration.");
 		} catch (Exception e) {
@@ -69,7 +71,6 @@ public class UserService implements IService<User> {
 			throw new EntityNotFoundException(String.format("User %s not found.", facebookId));
 		}
 		return foundUser;
-		
 	}
 
 	
