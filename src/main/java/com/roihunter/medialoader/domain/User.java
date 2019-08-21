@@ -3,6 +3,7 @@ package com.roihunter.medialoader.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -49,7 +50,7 @@ public class User implements Serializable {
 	@Column(name = "profile_picture")
 	private String profilePicture;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Photo> photos;
 	
 	public User(final String facebookId, final String name) {

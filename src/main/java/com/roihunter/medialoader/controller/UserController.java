@@ -2,6 +2,7 @@ package com.roihunter.medialoader.controller;
 
 import java.net.URI;
 
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,7 +28,7 @@ public class UserController {
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> create(@RequestHeader(name = "AccessToken", required = true) final String accessToken, 
-			final UriComponentsBuilder uriBuilder) {
+			final UriComponentsBuilder uriBuilder) throws AuthenticationException {
 		
 		final User user = userService.create(accessToken);
 	    final URI uri = uriBuilder.path("/v1/users/{id}").buildAndExpand(user.getFacebookId()).toUri();

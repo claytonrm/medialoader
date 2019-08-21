@@ -9,6 +9,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.io.IOException;
 
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,7 +59,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void create_shouldCallFacebookClientServiceToGetUserInfo() throws JsonParseException, JsonMappingException, IOException {
+	public void create_shouldCallFacebookClientServiceToGetUserInfo() throws JsonParseException, JsonMappingException, IOException, AuthenticationException {
 		final String accessToken = "EAAj259ZBvk6wBABiGRWYOvAGk7gMGwZDZD";
 		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);
 		final User expectedSavedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);
@@ -83,7 +84,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void create_shouldFillUserInfoWithPhotosCallingPhotoService() throws JsonParseException, JsonMappingException, IOException {
+	public void create_shouldFillUserInfoWithPhotosCallingPhotoService() throws JsonParseException, JsonMappingException, IOException, AuthenticationException {
 		final String accessToken = "EAAj259ZBvk6wBABiGRWYOvAGk7gMGwZDZD";
 		final User expectedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);
 		final User expectedSavedUser = mapper.readValue(Util.readJsonFile("sampleUserWithoutReactions.json"), User.class);

@@ -10,11 +10,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import javax.naming.AuthenticationException;
+import javax.persistence.EntityNotFoundException;
 
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -74,7 +74,6 @@ public class UserControllerTest {
 	}
 
 	@Test
-	@Ignore("Waiting for RestHandlerException")
 	public void create_shouldReturnUnauthorizedTokenExpiredOrInvalid() throws Exception {
 		BDDMockito.given(userService.create(accessToken)).willThrow(AuthenticationException.class);
 
@@ -110,11 +109,10 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	@Ignore("Waiting for RestHandlerException")
 	public void delete_shouldReturnNotFoundUserDoesNotExist() throws Exception {
 		final String userId = "123456789";
 		
-		doThrow(IllegalArgumentException.class).when(userService).delete(userId);
+		doThrow(EntityNotFoundException.class).when(userService).delete(userId);
 		
 		mockMvc.perform(delete("/v1/users/{id}", userId).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isNotFound());
@@ -139,10 +137,9 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	@Ignore("Waiting for RestHandlerException")
 	public void getUserInfo_shouldReturnNotFoundUserDoesNotExist() throws Exception {
 		final String userId = "1234567890";
-		given(userService.get(userId)).willThrow(IllegalArgumentException.class);
+		given(userService.get(userId)).willThrow(EntityNotFoundException.class);
 		
 		mockMvc.perform(get("/v1/users/{id}", userId).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isNotFound());
@@ -168,10 +165,9 @@ public class UserControllerTest {
 	}
 	
 	@Test
-	@Ignore("Waiting for RestHandlerException")
 	public void getUserPhotos_shouldReturnNotFoundUserDoesNotExist() throws Exception {
 		final String userId = "1234567890";
-		given(userService.getPhotos(userId)).willThrow(IllegalArgumentException.class);
+		given(userService.getPhotos(userId)).willThrow(EntityNotFoundException.class);
 		
 		mockMvc.perform(get("/v1/users/{id}/photos", userId).contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isNotFound());

@@ -1,6 +1,20 @@
 spring:
    application:
-   name: medialoader
+      name: medialoader
+   server:
+     port: 8080
+   datasource:
+      url: jdbc:postgresql://localhost:5432/medialoaderdb
+      username: postgres
+      password: Medialoader2019
+   jpa:
+      hibernate:
+         ddl-auto: create
+      properties:
+         hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            temp: 
+               use_jdbc_metadata_defaults: false
 services:
    api:
       facebook:
