@@ -11,6 +11,7 @@ Media loader for Facebook Users<br>
 - [Docker](https://www.docker.com)
 - [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html?printOnly=1)
 - [Lombok](https://projectlombok.org/download)
+- [Maven](https://maven.apache.org/download.cgi)
 - [Facebook User Access Token](https://developers.facebook.com/docs/facebook-login/access-tokens/)
 
 ### Setup
