@@ -50,7 +50,9 @@ public class UserController {
 	@ApiOperation(value = "Gets user info by Facebook ID")
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUserInfo(@PathVariable("id") final String id) {
-		return ResponseEntity.ok(userService.get(id));
+		final User user = userService.get(id);
+		return ResponseEntity.ok(new User(user.getFacebookId(), user.getName(), 
+				user.getGender(), user.getProfilePicture(), null));
 	}
 
 	@ApiOperation(value = "Get all user photos by Facebook ID")
