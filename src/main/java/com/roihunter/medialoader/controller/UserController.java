@@ -19,13 +19,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.roihunter.medialoader.domain.User;
 import com.roihunter.medialoader.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/v1/users")
+@Api(tags = "Users", value = "Resources to user management")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
+	@ApiOperation(value = "Fetches data on Facebook Graph API and saves on database")
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> create(@RequestHeader(name = "AccessToken", required = true) final String accessToken, 
 			final UriComponentsBuilder uriBuilder) throws AuthenticationException {
@@ -35,17 +40,20 @@ public class UserController {
 		return ResponseEntity.created(uri).body(new User(user.getFacebookId(), user.getName()));
 	}
 
+	@ApiOperation(value = "Deletes an user (not on Facebook database) by Facebook ID")
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable("id") final String id) {
 		userService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
+	@ApiOperation(value = "Gets user info by Facebook ID")
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUserInfo(@PathVariable("id") final String id) {
 		return ResponseEntity.ok(userService.get(id));
 	}
 
+	@ApiOperation(value = "Get all user photos by Facebook ID")
 	@GetMapping(value = "/{id}/photos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> getUserPhotos(@PathVariable("id") final String id) {
 		return ResponseEntity.ok(userService.getPhotos(id));
