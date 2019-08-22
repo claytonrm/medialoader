@@ -1,5 +1,5 @@
 # Media Loader
-Media loader for Facebook Users
+Media loader for Facebook Users<br>
 *An application to load all of your Facebook photos*
 
 ## Requirements
@@ -29,7 +29,7 @@ Set your docker up following the steps below to create a postgres instance:
 docker run --name medialoader-postgres --network=medialoader-network -e "POSTGRES_PASSWORD=Medialoader2019" -p 5432:5432 -d postgres
  ```
 
-- Create a database called ***medialoaderdb*** 
+- Create a database called *medialoaderdb*
  
  ```shell 
 docker exec medialoader-postgres psql -U postgres -c "CREATE DATABASE medialoaderdb" postgres
