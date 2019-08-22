@@ -15,21 +15,19 @@ Media loader for Facebook Users<br>
 ### Setup
 Set your docker up following the steps below to create a postgres instance:
 
-#####Download postgres
+##### Download postgres
  ```shell 
  docker pull postgres
  ```
-#####Create a network
+##### Create a network
  ```shell 
  docker network create --driver bridge medialoader-network
  ```
-
-#####Setup postgres
+##### Setup postgres
  ```shell 
 docker run --name medialoader-postgres --network=medialoader-network -e "POSTGRES_PASSWORD=Medialoader2019" -p 5432:5432 -d postgres
  ```
-
-#####Create a database called *medialoaderdb*
+##### Create a database called *medialoaderdb*
  ```shell 
 docker exec medialoader-postgres psql -U postgres -c "CREATE DATABASE medialoaderdb" postgres
  ```
