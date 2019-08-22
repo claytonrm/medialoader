@@ -4,13 +4,21 @@ spring:
    server:
      port: 8080
    datasource:
-      url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+      url: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+      username: sa
+      password:
    jpa:
       properties:
          hibernate:
             dialect: org.hibernate.dialect.H2Dialect
             temp: 
                use_jdbc_metadata_defaults: false
+flyway:
+   url: "jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;INIT=RUNSCRIPT FROM 'classpath:flyway_init.sql'"
+   user: sa
+   password:
+   baselineVersion: 1.0   
+
 services:
    api:
       facebook:

@@ -1,4 +1,4 @@
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
     id bigint NOT NULL,
     facebook_id character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -6,9 +6,9 @@ CREATE TABLE users
     name character varying(255) COLLATE pg_catalog."default" NOT NULL,
     profile_picture character varying(255) COLLATE pg_catalog."default",
     CONSTRAINT user_pk PRIMARY KEY (id)
-)
+);
 
-CREATE TABLE photos
+CREATE TABLE IF NOT EXISTS photos
 (
     id bigint NOT NULL,
     facebook_id character varying(255) COLLATE pg_catalog."default",
@@ -20,9 +20,9 @@ CREATE TABLE photos
         REFERENCES users (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-)
+);
 
-CREATE TABLE reactions
+CREATE TABLE IF NOT EXISTS reactions
 (
     id bigint NOT NULL,
     type character varying(255) COLLATE pg_catalog."default",
@@ -33,4 +33,6 @@ CREATE TABLE reactions
         REFERENCES photos (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-)
+);
+
+CREATE SEQUENCE hibernate_sequence START 1;

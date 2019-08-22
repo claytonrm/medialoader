@@ -36,13 +36,23 @@ public class MedialoaderApplicationIntegrationTests {
 		final URI uri = new URI(String.format("http://localhost:%d/v1/users", port));
 		
 		final HttpHeaders headers = new HttpHeaders();
-		headers.set("AccessToken", "EAAj259ZBvk6wBAC386sUgqlkKmWh7WrgTTZCbLJGEcjWuZCNcb2spppNXyHax0OZCq6zU4m7ehEgRyum3ysKGDf08Ihm8WP1dG62sJniRWA9wBJm6m0bqmFQsE87U4xbJmcYQMMhzJLcXXwqEIfHbZAtjiVFk5AfwAQ5G83JjjKoAZCqdNLsSmKCdwdUVleWDbosckwbvuwwZDZD");
+		headers.set("AccessToken", "EAAj259ZBvk6wBAG7P7h3AMGQCgUzmfxw04g3oaN6Qq7gEM0Cjt8zXR050kfR6QZBf2KiIQ6FegaJGyLEfXtJ2srL774LcZB2ZCqJrpjJOZB64yZAIPBlPGWWMTJKGVdEqbyXWiPdNoZCSqzQG8wujCPd8vFWeCKoH03kyKx3f6yXIkoYHjsWVjcOZAZAUS6E79HNve8lE1osQdAZDZD");
 		
 		final HttpEntity<User> request = new HttpEntity<User>(headers);
 		
 		final ResponseEntity<User> user = restTemplate.postForEntity(uri, request, User.class);
 		
 		assertThat(user).isEqualTo(new User("2425138454230590", "Clayton Mendonça"));
+	}
+	
+	@Test
+	@Ignore
+	public void testGettingUser() throws URISyntaxException {
+		final URI uri = new URI(String.format("http://localhost:%d/v1/users/%s", port, "2425138454230590"));
+		
+		final ResponseEntity<User> user = restTemplate.getForEntity(uri, User.class);
+		
+		assertThat(user.getBody().getName()).isEqualTo("Clayton Mendonça");
 	}
 
 }

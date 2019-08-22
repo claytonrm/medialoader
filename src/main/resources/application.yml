@@ -8,13 +8,17 @@ spring:
       username: postgres
       password: Medialoader2019
    jpa:
-      hibernate:
-         ddl-auto: create
       properties:
          hibernate:
             dialect: org.hibernate.dialect.PostgreSQLDialect
             temp: 
                use_jdbc_metadata_defaults: false
+flyway:
+   url: jdbc:postgresql://localhost:5432/medialoaderdb
+   user: postgres
+   password: Medialoader2019
+   baselineVersion: 1.0
+
 services:
    api:
       facebook:
